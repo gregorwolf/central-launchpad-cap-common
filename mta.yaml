@@ -22,6 +22,11 @@ modules:
  # ------------------------------------------------------------
    type: nodejs
    path: gen/srv
+   build-parameters:
+     ignore: ["node_modules/"]
+   parameters:
+     memory: 256M
+     disk-quota: 1G
    requires:
     # Resources extracted from CAP configuration
     - name: central-launchpad-cap-common-db
@@ -34,9 +39,13 @@ modules:
  - name: central-launchpad-cap-common-db-deployer
  # ------------------------------------------------------------
    type: hdb
-   path: gen/db  
+   path: gen/db
+   build-parameters:
+     ignore: ["node_modules/"]
    parameters:
      buildpack: nodejs_buildpack
+     memory: 256M
+     disk-quota: 256m
    requires:
     # 'hana' and 'xsuaa' resources extracted from CAP configuration
     - name: central-launchpad-cap-common-db
